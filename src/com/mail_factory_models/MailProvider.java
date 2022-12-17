@@ -1,4 +1,4 @@
-package com.mail_factory;
+package com.mail_factory_models;
 
 public abstract class MailProvider implements MailProviderInterface {
     public abstract String connect();

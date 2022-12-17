@@ -1,4 +1,4 @@
-package com.mail_factory;
+package com.mail_factory_models;
 
 public interface MailProviderInterface {
     String connect();
