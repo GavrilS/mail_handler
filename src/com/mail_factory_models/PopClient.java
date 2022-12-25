@@ -46,7 +46,8 @@ public class PopClient implements PopClientInterface {
 
             //create folder object and open it
             Folder emailFolder = store.getFolder("INBOX");
-            emailFolder.open(Folder.READ_WRITE);
+            emailFolder.open(Folder.READ_ONLY);
+//            emailFolder.open(Folder.READ_WRITE);
 
 //            Message[] messages = emailFolder.getMessages();
 //            int[] msgnums = {1, 2, 3};
@@ -54,7 +55,12 @@ public class PopClient implements PopClientInterface {
             if (countMessages == 0) {
                 countMessages = 1;
             }
-            Message[] messages = emailFolder.getMessages(1, countMessages);
+            Message[] messages;
+            try {
+                messages = emailFolder.getMessages(1, countMessages);
+            } catch (Exception e) {
+                messages = emailFolder.getMessages();
+            }
             System.out.println("messages.length----" + messages.length);
 
             for (int i=0; i<messages.length; i++) {
@@ -75,8 +81,8 @@ public class PopClient implements PopClientInterface {
             emailFolder.setFlags(messages, deleted, true);
 
             //close the store and folder objects
-//            emailFolder.close(false);
-            emailFolder.close(true);
+            emailFolder.close(false);
+//            emailFolder.close(true);
             store.close();
         }
         catch (NoSuchProviderException e) {
