@@ -88,7 +88,10 @@ public class MailTest {
 
 //        check(host, mailStoreType, username, password);
         PopClient abv = new PopClient(host, "995", username, password);
-        abv.retrieveAndClean();
+//        abv.retrieveAndClean(10);
+//        abv.retrieveAndClean(0);
+//        abv.retrieveAndClean(10000);
+        abv.retrieveAndClean(3);
     }
 
 }

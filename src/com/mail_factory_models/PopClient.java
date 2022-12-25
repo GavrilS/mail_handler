@@ -1,5 +1,6 @@
 package com.mail_factory_models;
 
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.Folder;
@@ -8,6 +9,9 @@ import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
+import javax.mail.Flags;
+
+//import java.time.LocalDateTime;
 
 
 public class PopClient implements PopClientInterface {
@@ -26,7 +30,8 @@ public class PopClient implements PopClientInterface {
     }
 
 
-    public String retrieveAndClean() {
+    public ArrayList<Message> retrieveAndClean(int countMessages) {
+        ArrayList<Message> checkedMessages = new ArrayList<Message>();
         try {
             Properties properties = new Properties();
 
@@ -41,28 +46,37 @@ public class PopClient implements PopClientInterface {
 
             //create folder object and open it
             Folder emailFolder = store.getFolder("INBOX");
-            emailFolder.open(Folder.READ_ONLY);
+            emailFolder.open(Folder.READ_WRITE);
 
 //            Message[] messages = emailFolder.getMessages();
 //            int[] msgnums = {1, 2, 3};
 //            Message[] messages = emailFolder.getMessages(msgnums);
-            Message[] messages = emailFolder.getMessages(1, 5);
+            if (countMessages == 0) {
+                countMessages = 1;
+            }
+            Message[] messages = emailFolder.getMessages(1, countMessages);
             System.out.println("messages.length----" + messages.length);
 
             for (int i=0; i<messages.length; i++) {
                 Message message = messages[i];
+                checkedMessages.add(message);
                 System.out.println("---------------------------------");
                 System.out.println("Email Number " + (i + 1));
                 System.out.println("Subject: " + message.getSubject());
                 System.out.println("From: " + message.getFrom()[0]);
 //                System.out.println("Received on: " + message.getReceivedDate());
                 System.out.println("Sent on: " + message.getSentDate());
+                System.out.println(message.getSentDate().getClass());
                 System.out.println("Flags: " + message.getFlags());
 //                System.out.println("Text: " + message.getContent().toString());
             }
 
+            Flags deleted = new Flags(Flags.Flag.DELETED);
+            emailFolder.setFlags(messages, deleted, true);
+
             //close the store and folder objects
-            emailFolder.close(false);
+//            emailFolder.close(false);
+            emailFolder.close(true);
             store.close();
         }
         catch (NoSuchProviderException e) {
@@ -74,7 +88,7 @@ public class PopClient implements PopClientInterface {
         catch (Exception e) {
             e.printStackTrace();
         }
-        return "Retrieving messages!";
+        return checkedMessages;
     }
 
     public String makeSummaryPerDay() {
