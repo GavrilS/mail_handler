@@ -1,11 +1,11 @@
-package com.mail_factory_models;
+package com.mail.factory.models;
 
 import javax.mail.Message;
 import java.util.ArrayList;
 
 public interface PopClientInterface {
 
-    ArrayList<Message> retrieveAndClean(int countMessages);
+    ArrayList<Message> retrieveAndClean(int countMessages, boolean cleanFlagedEmails);
 
     String makeSummaryPerDay();
 }

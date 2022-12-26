@@ -1,4 +1,4 @@
-package com.mail_handler;
+package com.mail.handler;
 
 public class Main {
 

@@ -1,6 +1,6 @@
 package com.test;
 
-import com.mail_factory_models.PopClient;
+import com.mail.factory.models.PopClient;
 
 import java.util.Scanner;
 
@@ -88,10 +88,10 @@ public class MailTest {
 
 //        check(host, mailStoreType, username, password);
         PopClient abv = new PopClient(host, "995", username, password);
-//        abv.retrieveAndClean(10);
-//        abv.retrieveAndClean(0);
-//        abv.retrieveAndClean(10000);
-        abv.retrieveAndClean(3);
+//        abv.retrieveAndClean(10, false);
+//        abv.retrieveAndClean(0, false);
+//        abv.retrieveAndClean(10000, false);
+        abv.retrieveAndClean(3, false);
     }
 
 }

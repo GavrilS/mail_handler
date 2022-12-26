@@ -1,4 +1,4 @@
-package com.mail_factory_models;
+package com.mail.factory.models;
 
 import java.util.ArrayList;
 import java.util.Properties;
@@ -30,7 +30,7 @@ public class PopClient implements PopClientInterface {
     }
 
 
-    public ArrayList<Message> retrieveAndClean(int countMessages) {
+    public ArrayList<Message> retrieveAndClean(int countMessages, boolean cleanFlagedEmails) {
         ArrayList<Message> checkedMessages = new ArrayList<Message>();
         try {
             Properties properties = new Properties();
@@ -81,7 +81,7 @@ public class PopClient implements PopClientInterface {
             emailFolder.setFlags(messages, deleted, true);
 
             //close the store and folder objects
-            emailFolder.close(false);
+            emailFolder.close(cleanFlagedEmails);
 //            emailFolder.close(true);
             store.close();
         }
