@@ -38,7 +38,7 @@ public class CheckedEmails {
         this.sender = sender;
     }
 
-    public String sender() {
+    public String getSender() {
         return this.sender;
     }
 
