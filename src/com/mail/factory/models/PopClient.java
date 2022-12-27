@@ -1,5 +1,7 @@
 package com.mail.factory.models;
 
+import com.mail.db.models.CheckedEmails;
+
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -30,8 +32,8 @@ public class PopClient implements PopClientInterface {
     }
 
 
-    public ArrayList<Message> retrieveAndClean(int countMessages, boolean cleanFlagedEmails) {
-        ArrayList<Message> checkedMessages = new ArrayList<Message>();
+    public ArrayList<CheckedEmails> retrieveAndClean(int countMessages, boolean cleanFlagedEmails, String platform) {
+        ArrayList<CheckedEmails> checkedMessages = new ArrayList<CheckedEmails>();
         try {
             Properties properties = new Properties();
 
@@ -65,7 +67,9 @@ public class PopClient implements PopClientInterface {
 
             for (int i=0; i<messages.length; i++) {
                 Message message = messages[i];
-                checkedMessages.add(message);
+                CheckedEmails email = new CheckedEmails(0, message.getFrom()[0].toString(), message.getSubject(), message.getSentDate(),
+                        message.getContent().toString(), platform, username);
+                checkedMessages.add(email);
                 System.out.println("---------------------------------");
                 System.out.println("Email Number " + (i + 1));
                 System.out.println("Subject: " + message.getSubject());
