@@ -24,9 +24,9 @@ public class CheckedEmailsRepositoryImpl implements CheckedEmailsRepository {
         statement.setString(3, email.getPlatform());
         statement.setString(4, email.getUser());
         statement.setString(5, email.getText());
-//        statement.setDate(6, email.getSentOn());
+        statement.setDate(6, new Date(email.getSentOn().getTime()));
         System.out.println(statement);
-//        statement.execute();
+        statement.execute();
         MysqlHelper.closeConnection(connection);
     }
 

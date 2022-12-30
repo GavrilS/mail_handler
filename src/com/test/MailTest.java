@@ -1,7 +1,12 @@
 package com.test;
 
+import com.mail.db.models.CheckedEmails;
+import com.mail.db.repositories.CheckedEmailsRepositoryImpl;
 import com.mail.factory.models.PopClient;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.util.Properties;
@@ -69,7 +74,7 @@ public class MailTest {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
         String host = "pop3.abv.bg";
         String mailStoreType = "pop3";
@@ -88,10 +93,17 @@ public class MailTest {
 
 //        check(host, mailStoreType, username, password);
         PopClient abv = new PopClient(host, "995", username, password);
-//        abv.retrieveAndClean(10, false);
-//        abv.retrieveAndClean(0, false);
-//        abv.retrieveAndClean(10000, false);
-        abv.retrieveAndClean(3, false);
+        String platform = "abv.bg";
+//        abv.retrieveAndClean(10, false, platform);
+//        abv.retrieveAndClean(0, false, platform);
+//        abv.retrieveAndClean(10000, false, platform);
+        ArrayList<CheckedEmails> emails = abv.retrieveAndClean(1, false, platform);
+        CheckedEmailsRepositoryImpl repository = new CheckedEmailsRepositoryImpl();
+        String dbUrl = "jdbc:mysql://localhost:3306/email_archives--root--newpass";
+
+        for (CheckedEmails email: emails) {
+            repository.saveCheckedEmail(email, dbUrl);
+        }
     }
 
 }
