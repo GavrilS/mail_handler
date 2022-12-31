@@ -3,6 +3,7 @@ package com.test;
 import com.mail.db.models.CheckedEmails;
 import com.mail.db.repositories.CheckedEmailsRepositoryImpl;
 import com.mail.factory.models.PopClient;
+import com.mail.factory.models.SMTPClient;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -78,6 +79,7 @@ public class MailTest {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
         String host = "pop3.abv.bg";
+        String smtpClient = "smtp.abv.bg";
         String mailStoreType = "pop3";
 
 //        String host = "pop.gmail.com";
@@ -98,10 +100,12 @@ public class MailTest {
 //        abv.retrieveAndClean(10, false, platform);
 //        abv.retrieveAndClean(0, false, platform);
 //        abv.retrieveAndClean(10000, false, platform);
-        List<CheckedEmails> emails = abv.retrieveAndClean(10, false);
+        List<CheckedEmails> emails = abv.retrieveAndClean(1, false);
         String summarizedEmails = abv.summarizeCheckedEmails(emails);
         System.out.println("Summary of checked emails: " + summarizedEmails);
 
+        SMTPClient abvSMTP = new SMTPClient(smtpClient, "465", username, password);
+        abvSMTP.sendSummary(summarizedEmails);
 //        CheckedEmailsRepositoryImpl repository = new CheckedEmailsRepositoryImpl();
 //        String dbUrl = "jdbc:mysql://localhost:3306/email_archives root newpass";
 //        for (CheckedEmails email: emails) {

@@ -37,6 +37,7 @@ public class PopClient implements PopClientInterface {
     }
 
 
+    @Override
     public List<CheckedEmails> retrieveAndClean(int countMessages, boolean cleanFlagedEmails) {
         List<CheckedEmails> checkedMessages = new ArrayList<CheckedEmails>();
         try {
@@ -107,6 +108,7 @@ public class PopClient implements PopClientInterface {
         return checkedMessages;
     }
 
+    @Override
     public String summarizeCheckedEmails(List<CheckedEmails> emailList) {
         StringBuilder str = new StringBuilder();
         for (CheckedEmails email: emailList) {
