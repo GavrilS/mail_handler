@@ -7,6 +7,7 @@ import com.mail.factory.models.PopClient;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import java.util.Properties;
@@ -97,13 +98,15 @@ public class MailTest {
 //        abv.retrieveAndClean(10, false, platform);
 //        abv.retrieveAndClean(0, false, platform);
 //        abv.retrieveAndClean(10000, false, platform);
-        ArrayList<CheckedEmails> emails = abv.retrieveAndClean(1, false);
-        CheckedEmailsRepositoryImpl repository = new CheckedEmailsRepositoryImpl();
-        String dbUrl = "jdbc:mysql://localhost:3306/email_archives root newpass";
+        List<CheckedEmails> emails = abv.retrieveAndClean(10, false);
+        String summarizedEmails = abv.summarizeCheckedEmails(emails);
+        System.out.println("Summary of checked emails: " + summarizedEmails);
 
-        for (CheckedEmails email: emails) {
-            repository.saveCheckedEmail(email, dbUrl);
-        }
+//        CheckedEmailsRepositoryImpl repository = new CheckedEmailsRepositoryImpl();
+//        String dbUrl = "jdbc:mysql://localhost:3306/email_archives root newpass";
+//        for (CheckedEmails email: emails) {
+//            repository.saveCheckedEmail(email, dbUrl);
+//        }
     }
 
 }

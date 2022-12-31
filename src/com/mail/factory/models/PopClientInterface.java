@@ -2,12 +2,11 @@ package com.mail.factory.models;
 
 import com.mail.db.models.CheckedEmails;
 
-import javax.mail.Message;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface PopClientInterface {
 
-    ArrayList<CheckedEmails> retrieveAndClean(int countMessages, boolean cleanFlagedEmails);
+    List<CheckedEmails> retrieveAndClean(int countMessages, boolean cleanFlagedEmails);
 
-    String makeSummaryPerDay();
+    String summarizeCheckedEmails(List<CheckedEmails> emailList);
 }

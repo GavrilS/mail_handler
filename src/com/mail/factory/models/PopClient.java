@@ -3,6 +3,7 @@ package com.mail.factory.models;
 import com.mail.db.models.CheckedEmails;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Folder;
@@ -23,6 +24,8 @@ public class PopClient implements PopClientInterface {
     private String username;
     private String password;
     private String platform;
+    private static final int MINIMUM_MESSAGE_COUNT = 1;
+    private static final int GET_ALL_MESSAGES = 0;
 
 
     public PopClient(String host, String port, String username, String password, String platform) {
@@ -34,8 +37,8 @@ public class PopClient implements PopClientInterface {
     }
 
 
-    public ArrayList<CheckedEmails> retrieveAndClean(int countMessages, boolean cleanFlagedEmails) {
-        ArrayList<CheckedEmails> checkedMessages = new ArrayList<CheckedEmails>();
+    public List<CheckedEmails> retrieveAndClean(int countMessages, boolean cleanFlagedEmails) {
+        List<CheckedEmails> checkedMessages = new ArrayList<CheckedEmails>();
         try {
             Properties properties = new Properties();
 
@@ -56,14 +59,15 @@ public class PopClient implements PopClientInterface {
 //            Message[] messages = emailFolder.getMessages();
 //            int[] msgnums = {1, 2, 3};
 //            Message[] messages = emailFolder.getMessages(msgnums);
-            if (countMessages == 0) {
-                countMessages = 1;
-            }
             Message[] messages;
-            try {
-                messages = emailFolder.getMessages(1, countMessages);
-            } catch (Exception e) {
+            if (countMessages == GET_ALL_MESSAGES) {
                 messages = emailFolder.getMessages();
+            } else {
+                try {
+                    messages = emailFolder.getMessages(MINIMUM_MESSAGE_COUNT, countMessages);
+                } catch (Exception e) {
+                    messages = emailFolder.getMessages();
+                }
             }
             System.out.println("messages.length----" + messages.length);
 
@@ -103,8 +107,13 @@ public class PopClient implements PopClientInterface {
         return checkedMessages;
     }
 
-    public String makeSummaryPerDay() {
-        return "This is a list of the emails for a particular day!";
+    public String summarizeCheckedEmails(List<CheckedEmails> emailList) {
+        StringBuilder str = new StringBuilder();
+        for (CheckedEmails email: emailList) {
+            str.append("Sender: " + email.getSender() + "; Date: " + email.getSentOn().toString() + "; Subject: " +
+                    email.getSubject() + "\n");
+        }
+        return str.toString();
     }
 
     private void setHost(String host) {
