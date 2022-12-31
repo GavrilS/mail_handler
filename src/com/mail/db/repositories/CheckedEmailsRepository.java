@@ -10,4 +10,7 @@ import java.sql.SQLException;
 public interface CheckedEmailsRepository {
     void saveCheckedEmail(CheckedEmails email, String dbUrl) throws SQLException, ClassNotFoundException;
 
+//    CheckedEmails getEmailBySubject(String subject);
+
+//    CheckedEmails getEmailBySender(String sender);
 }

@@ -22,17 +22,19 @@ public class PopClient implements PopClientInterface {
     private String port;
     private String username;
     private String password;
+    private String platform;
 
 
-    public PopClient(String host, String port, String username, String password) {
+    public PopClient(String host, String port, String username, String password, String platform) {
         setHost(host);
         setPort(port);
         setUsername(username);
         setPassword(password);
+        setPlatform(platform);
     }
 
 
-    public ArrayList<CheckedEmails> retrieveAndClean(int countMessages, boolean cleanFlagedEmails, String platform) {
+    public ArrayList<CheckedEmails> retrieveAndClean(int countMessages, boolean cleanFlagedEmails) {
         ArrayList<CheckedEmails> checkedMessages = new ArrayList<CheckedEmails>();
         try {
             Properties properties = new Properties();
@@ -68,7 +70,7 @@ public class PopClient implements PopClientInterface {
             for (int i=0; i<messages.length; i++) {
                 Message message = messages[i];
                 CheckedEmails email = new CheckedEmails(0, message.getFrom()[0].toString(), message.getSubject(), message.getSentDate(),
-                        message.getContent().toString(), platform, username);
+                        message.getContent().toString(), this.platform, this.username);
                 checkedMessages.add(email);
                 System.out.println("---------------------------------");
                 System.out.println("Email Number " + (i + 1));
@@ -147,5 +149,16 @@ public class PopClient implements PopClientInterface {
 
     private String getPassword() {
         return this.password;
+    }
+
+    private void setPlatform(String platform) {
+        if (platform == null || platform == "") {
+            System.out.println("Platform must be set and cannot be null or empty!");
+        }
+        this.platform = platform;
+    }
+
+    public String getPlatform() {
+        return this.platform;
     }
 }

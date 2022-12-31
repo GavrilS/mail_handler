@@ -30,4 +30,12 @@ public class CheckedEmailsRepositoryImpl implements CheckedEmailsRepository {
         MysqlHelper.closeConnection(connection);
     }
 
+
+//    public CheckedEmails getEmailBySubject(String subject) {
+//
+//    }
+//
+//    public CheckedEmails getEmailBySender(String sender) {
+//
+//    }
 }

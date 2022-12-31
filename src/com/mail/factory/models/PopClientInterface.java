@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public interface PopClientInterface {
 
-    ArrayList<CheckedEmails> retrieveAndClean(int countMessages, boolean cleanFlagedEmails, String platform);
+    ArrayList<CheckedEmails> retrieveAndClean(int countMessages, boolean cleanFlagedEmails);
 
     String makeSummaryPerDay();
 }

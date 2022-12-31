@@ -92,14 +92,14 @@ public class MailTest {
 //        System.out.printf("Username: %s - Password: %s", username, password);
 
 //        check(host, mailStoreType, username, password);
-        PopClient abv = new PopClient(host, "995", username, password);
-        String platform = "abv.bg";
+        PopClient abv = new PopClient(host, "995", username, password, "abv.bg");
+//        String platform = "abv.bg";
 //        abv.retrieveAndClean(10, false, platform);
 //        abv.retrieveAndClean(0, false, platform);
 //        abv.retrieveAndClean(10000, false, platform);
-        ArrayList<CheckedEmails> emails = abv.retrieveAndClean(1, false, platform);
+        ArrayList<CheckedEmails> emails = abv.retrieveAndClean(1, false);
         CheckedEmailsRepositoryImpl repository = new CheckedEmailsRepositoryImpl();
-        String dbUrl = "jdbc:mysql://localhost:3306/email_archives--root--newpass";
+        String dbUrl = "jdbc:mysql://localhost:3306/email_archives root newpass";
 
         for (CheckedEmails email: emails) {
             repository.saveCheckedEmail(email, dbUrl);

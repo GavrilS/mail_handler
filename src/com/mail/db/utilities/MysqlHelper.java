@@ -5,7 +5,7 @@ import java.sql.*;
 public class MysqlHelper {
 
     public static Connection dbConnect(String dbUrl) throws SQLException, ClassNotFoundException {
-        String[] credentials = dbUrl.split("--");
+        String[] credentials = dbUrl.split(" ");
 
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection(credentials[0], credentials[1], credentials[2]);
