@@ -1,6 +1,7 @@
 package com.mail.factory.models;
 
 import com.mail.db.models.CheckedEmail;
+import com.mail.db.models.EmailServerConnector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,26 +15,17 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.Flags;
 
-//import java.time.LocalDateTime;
 
 
 public class PopClient implements PopClientInterface {
 
-    private String host;
-    private String port;
-    private String username;
-    private String password;
-    private String platform;
+    private EmailServerConnector emailConnector;
     private static final int MINIMUM_MESSAGE_COUNT = 1;
     private static final int GET_ALL_MESSAGES = 0;
 
 
-    public PopClient(String host, String port, String username, String password, String platform) {
-        setHost(host);
-        setPort(port);
-        setUsername(username);
-        setPassword(password);
-        setPlatform(platform);
+    public PopClient(EmailServerConnector emailConnector) {
+        setEmailConnector(emailConnector);
     }
 
 
@@ -43,23 +35,20 @@ public class PopClient implements PopClientInterface {
         try {
             Properties properties = new Properties();
 
-            properties.put("mail.pop3.host", this.host);
-            properties.put("mail.pop3.port", this.port);
+            properties.put("mail.pop3.host", this.emailConnector.getHost());
+            properties.put("mail.pop3.port", this.emailConnector.getPort());
             properties.put("mail.pop3.starttls.enable", "true");
             Session emailSession = Session.getDefaultInstance(properties);
             //create the POP3 store object and connect with the pop server
             Store store = emailSession.getStore("pop3s");
 
-            store.connect(this.host, this.username, this.password);
+            store.connect(this.emailConnector.getHost(), this.emailConnector.getUsername(), this.emailConnector.getPassword());
 
             //create folder object and open it
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_ONLY);
 //            emailFolder.open(Folder.READ_WRITE);
 
-//            Message[] messages = emailFolder.getMessages();
-//            int[] msgnums = {1, 2, 3};
-//            Message[] messages = emailFolder.getMessages(msgnums);
             Message[] messages;
             if (countMessages == GET_ALL_MESSAGES) {
                 messages = emailFolder.getMessages();
@@ -75,7 +64,7 @@ public class PopClient implements PopClientInterface {
             for (int i=0; i<messages.length; i++) {
                 Message message = messages[i];
                 CheckedEmail email = new CheckedEmail(0, message.getFrom()[0].toString(), message.getSubject(), message.getSentDate(),
-                        message.getContent().toString(), this.platform, this.username);
+                        message.getContent().toString(), this.getEmailConnector().getPlatform(), this.getEmailConnector().getUsername());
                 checkedMessages.add(email);
                 System.out.println("---------------------------------");
                 System.out.println("Email Number " + (i + 1));
@@ -93,7 +82,6 @@ public class PopClient implements PopClientInterface {
 
             //close the store and folder objects
             emailFolder.close(cleanFlagedEmails);
-//            emailFolder.close(true);
             store.close();
         }
         catch (NoSuchProviderException e) {
@@ -118,58 +106,14 @@ public class PopClient implements PopClientInterface {
         return str.toString();
     }
 
-    private void setHost(String host) {
-        if (host == null || host == "") {
-            System.out.println("Host must be set and cannot be null or empty!");
+    private void setEmailConnector(EmailServerConnector emailConnector) {
+        if (emailConnector == null) {
+            System.out.println("The email connector cannot be null!");
         }
-        this.host = host;
+        this.emailConnector = emailConnector;
     }
 
-    public String getHost() {
-        return this.host;
-    }
-
-    private void setPort(String port) {
-        if (port == null || port == "") {
-            System.out.println("Port must be set and cannot be null or empty!");
-        }
-        this.port = port;
-    }
-
-    public String getPort() {
-        return this.port;
-    }
-
-    private void setUsername(String username) {
-        if (username == null || username == "") {
-            System.out.println("Username must be set and cannot be null or empty!");
-        }
-        this.username = username;
-    }
-
-    private String getUsername() {
-        return this.username;
-    }
-
-    private void setPassword(String password) {
-        if (password == null || password == "") {
-            System.out.println("Password must be set and cannot be null or empty!");
-        }
-        this.password = password;
-    }
-
-    private String getPassword() {
-        return this.password;
-    }
-
-    private void setPlatform(String platform) {
-        if (platform == null || platform == "") {
-            System.out.println("Platform must be set and cannot be null or empty!");
-        }
-        this.platform = platform;
-    }
-
-    public String getPlatform() {
-        return this.platform;
+    public EmailServerConnector getEmailConnector() {
+        return this.emailConnector;
     }
 }
