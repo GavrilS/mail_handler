@@ -1,6 +1,6 @@
 package com.mail.db.repositories;
 
-import com.mail.db.models.CheckedEmails;
+import com.mail.db.models.CheckedEmail;
 
 import java.sql.*;
 
@@ -9,7 +9,7 @@ import com.mail.db.utilities.*;
 
 public class CheckedEmailsRepositoryImpl implements CheckedEmailsRepository {
 
-    public void saveCheckedEmail(CheckedEmails email, String dbUrl) throws SQLException, ClassNotFoundException {
+    public void saveCheckedEmail(CheckedEmail email, String dbUrl) throws SQLException, ClassNotFoundException {
 
         Connection connection = MysqlHelper.dbConnect(dbUrl);
 //        Statement statement = connection.createStatement();
@@ -31,11 +31,11 @@ public class CheckedEmailsRepositoryImpl implements CheckedEmailsRepository {
     }
 
 
-//    public CheckedEmails getEmailBySubject(String subject) {
+//    public CheckedEmail getEmailBySubject(String subject) {
 //
 //    }
 //
-//    public CheckedEmails getEmailBySender(String sender) {
+//    public CheckedEmail getEmailBySender(String sender) {
 //
 //    }
 }

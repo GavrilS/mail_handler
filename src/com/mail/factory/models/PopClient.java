@@ -1,6 +1,6 @@
 package com.mail.factory.models;
 
-import com.mail.db.models.CheckedEmails;
+import com.mail.db.models.CheckedEmail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +38,8 @@ public class PopClient implements PopClientInterface {
 
 
     @Override
-    public List<CheckedEmails> retrieveAndClean(int countMessages, boolean cleanFlagedEmails) {
-        List<CheckedEmails> checkedMessages = new ArrayList<CheckedEmails>();
+    public List<CheckedEmail> retrieveAndClean(int countMessages, boolean cleanFlagedEmails) {
+        List<CheckedEmail> checkedMessages = new ArrayList<CheckedEmail>();
         try {
             Properties properties = new Properties();
 
@@ -74,7 +74,7 @@ public class PopClient implements PopClientInterface {
 
             for (int i=0; i<messages.length; i++) {
                 Message message = messages[i];
-                CheckedEmails email = new CheckedEmails(0, message.getFrom()[0].toString(), message.getSubject(), message.getSentDate(),
+                CheckedEmail email = new CheckedEmail(0, message.getFrom()[0].toString(), message.getSubject(), message.getSentDate(),
                         message.getContent().toString(), this.platform, this.username);
                 checkedMessages.add(email);
                 System.out.println("---------------------------------");
@@ -109,9 +109,9 @@ public class PopClient implements PopClientInterface {
     }
 
     @Override
-    public String summarizeCheckedEmails(List<CheckedEmails> emailList) {
+    public String summarizeCheckedEmails(List<CheckedEmail> emailList) {
         StringBuilder str = new StringBuilder();
-        for (CheckedEmails email: emailList) {
+        for (CheckedEmail email: emailList) {
             str.append("Sender: " + email.getSender() + "; Date: " + email.getSentOn().toString() + "; Subject: " +
                     email.getSubject() + "\n");
         }

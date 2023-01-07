@@ -3,7 +3,7 @@ package com.mail.db.models;
 //import java.time.LocalDateTime;
 import java.util.Date;
 
-public class CheckedEmails {
+public class CheckedEmail {
     private int id;
     private String sender;
     private String subject;
@@ -13,7 +13,7 @@ public class CheckedEmails {
     private String platform;
     private String user;
 
-    public CheckedEmails(int id, String sender, String subject, Date sentOn, String text, String platform, String user) {
+    public CheckedEmail(int id, String sender, String subject, Date sentOn, String text, String platform, String user) {
         setId(id);
         setSender(sender);
         setSubject(subject);

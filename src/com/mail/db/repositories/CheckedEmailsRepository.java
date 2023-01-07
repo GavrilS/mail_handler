@@ -1,16 +1,13 @@
 package com.mail.db.repositories;
 
-import com.mail.db.models.CheckedEmails;
+import com.mail.db.models.CheckedEmail;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import java.io.IOException;
 import java.sql.SQLException;
 
 public interface CheckedEmailsRepository {
-    void saveCheckedEmail(CheckedEmails email, String dbUrl) throws SQLException, ClassNotFoundException;
+    void saveCheckedEmail(CheckedEmail email, String dbUrl) throws SQLException, ClassNotFoundException;
 
-//    CheckedEmails getEmailBySubject(String subject);
+//    CheckedEmail getEmailBySubject(String subject);
 
-//    CheckedEmails getEmailBySender(String sender);
+//    CheckedEmail getEmailBySender(String sender);
 }

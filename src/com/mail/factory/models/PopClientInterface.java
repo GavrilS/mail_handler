@@ -1,12 +1,12 @@
 package com.mail.factory.models;
 
-import com.mail.db.models.CheckedEmails;
+import com.mail.db.models.CheckedEmail;
 
 import java.util.List;
 
 public interface PopClientInterface {
 
-    List<CheckedEmails> retrieveAndClean(int countMessages, boolean cleanFlagedEmails);
+    List<CheckedEmail> retrieveAndClean(int countMessages, boolean cleanFlagedEmails);
 
-    String summarizeCheckedEmails(List<CheckedEmails> emailList);
+    String summarizeCheckedEmails(List<CheckedEmail> emailList);
 }
