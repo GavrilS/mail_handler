@@ -27,9 +27,10 @@ public class CommandUtility {
 
     private static List<String> getCommands() {
         List<String> commandList = Stream.of(
-                "create summary",
+                "send summary",
                 "clear emails",
-                "backup emails",
+                "set connection",
+                "create message",
                 "help",
                 "exit"
         ).collect(Collectors.toList());
