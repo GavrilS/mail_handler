@@ -20,7 +20,7 @@ public class EmailServerConnector {
     }
 
     private void setUsername(String username) {
-        if (username == null || username == "") {
+        if (username == null || username.equals("")) {
             System.out.println("Username cannot be empty or null!");
         }
         this.username = username;
@@ -31,7 +31,7 @@ public class EmailServerConnector {
     }
 
     private void setPassword(String password) {
-        if (password == null || password == "") {
+        if (password == null || password.equals("")) {
             System.out.println("Password cannot be empty or null!");
         }
         this.password = password;
@@ -42,7 +42,7 @@ public class EmailServerConnector {
     }
 
     private void setPlatform(String platform) {
-        if (platform == null || platform == "") {
+        if (platform == null || platform.equals("")) {
             System.out.println("Platform cannot be empty or null!");
         }
         this.platform = platform;
@@ -53,7 +53,7 @@ public class EmailServerConnector {
     }
 
     private void setHost(String host) {
-        if (host == null || host == "") {
+        if (host == null || host.equals("")) {
             System.out.println("Host cannot be empty or null!");
         }
         this.host = host;
@@ -64,7 +64,7 @@ public class EmailServerConnector {
     }
 
     private void setPort(String port) {
-        if (port == null || port == "") {
+        if (port == null || port.equals("")) {
             System.out.println("Port cannot be empty or null!");
         }
         this.port = port;

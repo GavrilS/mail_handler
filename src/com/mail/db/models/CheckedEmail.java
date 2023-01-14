@@ -32,7 +32,7 @@ public class CheckedEmail {
     }
 
     private void setSender(String sender) {
-        if (sender == null || sender == "") {
+        if (sender == null || sender.equals("")) {
             System.out.println("Sender must not be null or empty!");
         }
         this.sender = sender;
@@ -43,7 +43,7 @@ public class CheckedEmail {
     }
 
     private void setSubject(String subject) {
-        if (subject == null || subject == "") {
+        if (subject == null || subject.equals("")) {
             System.out.println("Subject must not be null or empty!");
         }
         this.subject = subject;
@@ -73,7 +73,7 @@ public class CheckedEmail {
     }
 
     private void setPlatform(String platform) {
-        if (platform == null || platform == "") {
+        if (platform == null || platform.equals("")) {
             System.out.println("Platform must not be null or empty!");
         }
         this.platform = platform;
@@ -84,7 +84,7 @@ public class CheckedEmail {
     }
 
     private void setUser(String user) {
-        if (user == null || user == "") {
+        if (user == null || user.equals("")) {
             System.out.println("User must not be null or empty!");
         }
         this.user = user;

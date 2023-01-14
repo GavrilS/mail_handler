@@ -13,7 +13,7 @@ public class MessageTemplate {
     }
 
     private void setSender(String sender) {
-        if (sender == null || sender == "") {
+        if (sender == null || sender.equals("")) {
             System.out.println("Sender cannot be null or empty!");
         }
         this.sender = sender;
@@ -24,7 +24,7 @@ public class MessageTemplate {
     }
 
     private void setRecipients(String recipients) {
-        if (recipients == null || recipients == "") {
+        if (recipients == null || recipients.equals("")) {
             System.out.println("Recipients cannot be null or empty!");
         }
         this.recipients = recipients;
@@ -35,7 +35,7 @@ public class MessageTemplate {
     }
 
     public void setSubject(String subject) {
-        if (subject == null || subject == "") {
+        if (subject == null || subject.equals("")) {
             System.out.println("Subject cannot be null or empty!");
         }
         this.subject = subject;

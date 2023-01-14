@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 public class CommandUtility {
 
     public static boolean verifyCommand(String command) {
-        if(command == " ") {
+        if(command.equals("")) {
           return false;
         }
         command = command.toLowerCase();
