@@ -1,4 +1,4 @@
-package com.mail.commands;
+package com.mail.commands.models;
 
 public class SendSummaryCommand implements CommandInterface {
 

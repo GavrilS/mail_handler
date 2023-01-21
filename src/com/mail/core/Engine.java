@@ -3,7 +3,7 @@ package com.mail.core;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import com.mail.commands.CommandUtility;
+import com.mail.commands.utilities.CommandUtility;
 
 public class Engine {
 
@@ -24,6 +24,7 @@ public class Engine {
                     flag = false;
                     continue;
                 }
+
 
             }
             catch (IOException e) {

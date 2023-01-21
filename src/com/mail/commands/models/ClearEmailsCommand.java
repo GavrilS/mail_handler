@@ -1,4 +1,4 @@
-package com.mail.commands;
+package com.mail.commands.models;
 
 public class ClearEmailsCommand implements CommandInterface {
 
@@ -10,4 +10,5 @@ public class ClearEmailsCommand implements CommandInterface {
     public void executeCommand() {
 
     }
+
 }
