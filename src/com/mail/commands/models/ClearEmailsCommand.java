@@ -1,5 +1,7 @@
 package com.mail.commands.models;
 
+import com.mail.commands.repository.TempState;
+
 public class ClearEmailsCommand implements CommandInterface {
     private boolean sendSummary;
 
@@ -8,7 +10,7 @@ public class ClearEmailsCommand implements CommandInterface {
         setSendSummary(sendSummary);
     }
 
-    public void executeCommand() {
+    public void executeCommand(TempState state) {
 
     }
 

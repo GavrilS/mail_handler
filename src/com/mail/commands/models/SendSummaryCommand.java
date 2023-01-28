@@ -1,5 +1,7 @@
 package com.mail.commands.models;
 
+import com.mail.commands.repository.TempState;
+
 public class SendSummaryCommand implements CommandInterface {
 
 
@@ -7,7 +9,7 @@ public class SendSummaryCommand implements CommandInterface {
         // Default constructor
     }
 
-    public void executeCommand() {
+    public void executeCommand(TempState state) {
 
     }
 }
