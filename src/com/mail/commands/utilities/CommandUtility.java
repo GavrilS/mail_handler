@@ -30,8 +30,10 @@ public class CommandUtility {
                 "send summary only",
                 "clear emails",
                 "clear emails with summary",
-                "set connection",
+                "set connector",
                 "create message",
+                "load connectors from file",
+                "load messages from file",
                 "help",
                 "exit"
         ).collect(Collectors.toList());
