@@ -1,8 +1,5 @@
 package com.mail.factory.models;
 
-import com.mail.db.models.EmailServerConnector;
-import com.mail.db.models.MessageTemplate;
-
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;

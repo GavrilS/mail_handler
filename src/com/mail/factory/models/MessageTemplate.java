@@ -1,4 +1,4 @@
-package com.mail.db.models;
+package com.mail.factory.models;
 
 public class MessageTemplate {
     private String sender;

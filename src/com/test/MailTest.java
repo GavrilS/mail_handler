@@ -1,8 +1,8 @@
 package com.test;
 
-import com.mail.db.models.CheckedEmail;
-import com.mail.db.models.EmailServerConnector;
-import com.mail.db.models.MessageTemplate;
+import com.mail.factory.models.CheckedEmail;
+import com.mail.factory.models.EmailServerConnector;
+import com.mail.factory.models.MessageTemplate;
 import com.mail.factory.models.PopClient;
 import com.mail.factory.models.SMTPClient;
 

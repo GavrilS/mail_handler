@@ -1,8 +1,5 @@
 package com.mail.factory.models;
 
-import com.mail.db.models.CheckedEmail;
-import com.mail.db.models.EmailServerConnector;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;

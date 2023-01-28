@@ -1,6 +1,6 @@
 package com.mail.db.repositories;
 
-import com.mail.db.models.CheckedEmail;
+import com.mail.factory.models.CheckedEmail;
 
 import java.sql.*;
 

@@ -1,4 +1,4 @@
-package com.mail.db.models;
+package com.mail.factory.models;
 
 //import java.time.LocalDateTime;
 import java.util.Date;

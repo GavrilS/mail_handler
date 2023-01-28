@@ -12,7 +12,9 @@ public class CommandConstructorImpl implements CommandConstructorInterface {
     public CommandInterface returnCommand(String command) {
         switch(command.toLowerCase()) {
             case "clear emails":
-                return new ClearEmailsCommand();
+                return new ClearEmailsCommand(false);
+            case "clear emails with summary":
+                return new ClearEmailsCommand(true);
             default:
                 return null;
         }
