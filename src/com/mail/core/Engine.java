@@ -7,12 +7,15 @@ import java.io.InputStreamReader;
 import com.mail.commands.constructors.CommandConstructorImpl;
 import com.mail.commands.constructors.CommandConstructorInterface;
 import com.mail.commands.models.CommandInterface;
+import com.mail.commands.repository.TempState;
 import com.mail.commands.utilities.CommandUtility;
 
 public class Engine {
 
     public static void run() {
         boolean flag = true;
+        CommandConstructorInterface commandConstructor = new CommandConstructorImpl();
+        TempState currentState = new TempState();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while(flag) {
@@ -29,13 +32,13 @@ public class Engine {
                     continue;
                 }
 
-                CommandConstructorInterface commandConstructor = new CommandConstructorImpl();
+
                 CommandInterface commandImpl = commandConstructor.returnCommand(command);
                 if (commandImpl == null) {
                     System.out.println("Invalid command! Please try again...");
                     continue;
                 }
-                commandImpl.executeCommand();
+                commandImpl.executeCommand(currentState);
             }
             catch (IOException e) {
                 System.out.println(e);
