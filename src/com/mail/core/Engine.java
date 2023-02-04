@@ -38,7 +38,12 @@ public class Engine {
                     System.out.println("Invalid command! Please try again...");
                     continue;
                 }
-                commandImpl.executeCommand(currentState);
+                String helpCommand = "help";
+                if (command.toLowerCase().contains(helpCommand)) {
+                    commandImpl.executeHelp();
+                } else {
+                    commandImpl.executeCommand(currentState);
+                }
             }
             catch (IOException e) {
                 System.out.println(e);

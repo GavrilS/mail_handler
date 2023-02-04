@@ -14,6 +14,11 @@ public class ClearEmailsCommand implements CommandInterface {
 
     }
 
+
+    public void executeHelp() {
+
+    }
+
     private void setSendSummary(boolean sendSummary) {
         this.sendSummary = sendSummary;
     }

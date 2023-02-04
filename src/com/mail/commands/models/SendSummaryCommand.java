@@ -12,4 +12,9 @@ public class SendSummaryCommand implements CommandInterface {
     public void executeCommand(TempState state) {
 
     }
+
+
+    public void executeHelp() {
+
+    }
 }
