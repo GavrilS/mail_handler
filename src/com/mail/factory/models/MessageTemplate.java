@@ -52,4 +52,12 @@ public class MessageTemplate {
     public String getText() {
         return this.text;
     }
+
+
+    @Override
+    public String toString() {
+        System.out.printf("Sender: %s, Recipient: %s, Subject: %s, Text: %s",
+                this.getSender(), this.getRecipients(), this.getSubject(), this.getText());
+        return "";
+    }
 }

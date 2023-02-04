@@ -81,4 +81,14 @@ public class EmailServerConnector {
     public boolean getSecureConnection() {
         return this.secureConnection;
     }
+
+    @Override
+    public String toString() {
+        System.out.printf("Username: %s, Password: %s, Platform: %s, Host: %s, Port: %s, SecureConnection: %s",
+                this.getUsername(), this.getPassword(), this.getPlatform(), this.getHost(), this.getPort(),
+                this.getSecureConnection());
+//        System.out.printf("Username: %s, Platform: %s, Host: %s, Port: %s, SecureConnection: %s",
+//                this.getUsername(), this.getPlatform(), this.getHost(), this.getPort(), this.getSecureConnection());
+        return "";
+    }
 }

@@ -93,4 +93,11 @@ public class CheckedEmail {
     public String getUser() {
         return this.user;
     }
+
+    @Override
+    public String toString() {
+        System.out.printf("Sender: %s, Subject: %s, Platform: %s, User: %s",
+                this.getSender(), this.getSubject(), this.getPlatform(), this.getUser());
+        return "";
+    }
 }
