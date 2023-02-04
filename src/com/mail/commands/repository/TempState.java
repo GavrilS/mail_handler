@@ -1,5 +1,6 @@
 package com.mail.commands.repository;
 
+import com.mail.factory.models.CheckedEmail;
 import com.mail.factory.models.EmailServerConnector;
 import com.mail.factory.models.MessageTemplate;
 
@@ -9,10 +10,12 @@ import java.util.List;
 public class TempState {
     private List<EmailServerConnector> connectors;
     private List<MessageTemplate> messages;
+    private List<CheckedEmail> emails;
 
     public TempState() {
-        this.connectors = new ArrayList<EmailServerConnector>();
-        this.messages = new ArrayList<MessageTemplate>();
+        this.connectors = new ArrayList<>();
+        this.messages = new ArrayList<>();
+        this.emails = new ArrayList<>();
     }
 
     public void addConnector(EmailServerConnector e) {
@@ -35,11 +38,25 @@ public class TempState {
         }
     }
 
+    public void addEmail(CheckedEmail e) {
+        this.emails.add(e);
+    }
+
+    public void addEmails(List<CheckedEmail> emailList) {
+        for (CheckedEmail e: emailList) {
+            this.emails.add(e);
+        }
+    }
+
     public List<EmailServerConnector> getCurrentConnectors() {
         return this.connectors;
     }
 
     public List<MessageTemplate> getCurrentMessages() {
         return this.messages;
+    }
+
+    public List<CheckedEmail> getCurrentEmails() {
+        return this.emails;
     }
 }
