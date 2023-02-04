@@ -10,7 +10,7 @@ public class SMTPConstructorImpl implements SMTPConstructorInterface {
     }
 
     public SMTPClient returnSMTPClient(EmailServerConnector connector) {
-        switch(connector.getPlatform()) {
+        switch(connector.getPlatform().toLowerCase()) {
             default:
                 return new SMTPClient(connector);
         }

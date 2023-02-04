@@ -10,7 +10,7 @@ public class PopConstructorImpl implements PopConstructorInterface {
     }
 
     public PopClient returnPopClient(EmailServerConnector connector) {
-        switch(connector.getPlatform()) {
+        switch(connector.getPlatform().toLowerCase()) {
             default:
                 return new PopClient(connector);
         }
