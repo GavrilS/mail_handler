@@ -93,16 +93,6 @@ public class PopClient implements PopClientInterface {
         return checkedMessages;
     }
 
-    @Override
-    public String summarizeCheckedEmails(List<CheckedEmail> emailList) {
-        StringBuilder str = new StringBuilder();
-        for (CheckedEmail email: emailList) {
-            str.append("Sender: " + email.getSender() + "; Date: " + email.getSentOn().toString() + "; Subject: " +
-                    email.getSubject() + "\n");
-        }
-        return str.toString();
-    }
-
     private void setEmailConnector(EmailServerConnector emailConnector) {
         if (emailConnector == null) {
             System.out.println("The email connector cannot be null!");
