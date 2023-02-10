@@ -1,6 +1,7 @@
 package com.mail.commands.models;
 
 import com.mail.commands.repository.TempState;
+import com.mail.commands.utilities.CommandUtility;
 import com.mail.factory.constructors.PopConstructorImpl;
 import com.mail.factory.constructors.PopConstructorInterface;
 import com.mail.factory.models.CheckedEmail;
@@ -21,7 +22,7 @@ public class ClearEmailsCommand implements CommandInterface {
 
     public void executeCommand(TempState state) {
         List<CheckedEmail> emails;
-        EmailServerConnector connector = chooseConnector(state.getCurrentConnectors());
+        EmailServerConnector connector = CommandUtility.chooseConnector(state.getCurrentConnectors());
         if (connector == null) {
             System.out.println("Something went wrong! Please try again...");
         }
@@ -44,23 +45,6 @@ public class ClearEmailsCommand implements CommandInterface {
         }
     }
 
-
-    private EmailServerConnector chooseConnector(List<EmailServerConnector> connectors) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Available connectors:");
-        for (int i=0; i<connectors.size(); i++) {
-            System.out.println(i + ". " + connectors.get(i).toString());
-        }
-        System.out.println("Choose which connector to use:");
-        try {
-            int conId = Integer.parseInt(reader.readLine());
-            return connectors.get(conId);
-        } catch (Exception e) {
-            System.out.println("Something went wrong! Please try again...");
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     private int getMessageCountToClear() {
         int messageCount = 0;
