@@ -36,6 +36,7 @@ public class SendSummaryCommand implements CommandInterface {
         }
         setMessageText(message, state);
         smtpClient.sendSummary(message);
+        System.out.println("Summary sent successfully!");
     }
 
 
