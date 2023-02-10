@@ -15,7 +15,7 @@ public class Engine {
     public static void run() {
         boolean flag = true;
         CommandConstructorInterface commandConstructor = new CommandConstructorImpl();
-        TempState currentState = new TempState();
+        TempState currentState = TempState.getInstance();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while(flag) {

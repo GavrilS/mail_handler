@@ -11,11 +11,19 @@ public class TempState {
     private List<EmailServerConnector> connectors;
     private List<MessageTemplate> messages;
     private List<CheckedEmail> emails;
+    private static TempState object;
 
-    public TempState() {
+    private TempState() {
         this.connectors = new ArrayList<>();
         this.messages = new ArrayList<>();
         this.emails = new ArrayList<>();
+    }
+
+    public static TempState getInstance() {
+        if (object == null) {
+            object = new TempState();
+        }
+        return object;
     }
 
     public void addConnector(EmailServerConnector e) {
