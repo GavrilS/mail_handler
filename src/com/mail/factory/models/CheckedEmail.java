@@ -96,8 +96,8 @@ public class CheckedEmail {
 
     @Override
     public String toString() {
-        System.out.printf("Sender: %s, Subject: %s, Platform: %s, User: %s",
+        String output = String.format("Sender: %s, Subject: %s, Platform: %s, User: %s",
                 this.getSender(), this.getSubject(), this.getPlatform(), this.getUser());
-        return "";
+        return output;
     }
 }

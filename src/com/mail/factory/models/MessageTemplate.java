@@ -56,8 +56,8 @@ public class MessageTemplate {
 
     @Override
     public String toString() {
-        System.out.printf("Sender: %s, Recipient: %s, Subject: %s, Text: %s",
+        String output = String.format("Sender: %s, Recipient: %s, Subject: %s, Text: %s",
                 this.getSender(), this.getRecipients(), this.getSubject(), this.getText());
-        return "";
+        return output;
     }
 }
