@@ -50,7 +50,7 @@ public class ClearEmailsCommand implements CommandInterface {
         int messageCount = 0;
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("Please specify how many messages do you want to clear:");
+            System.out.println("Please specify how many messages do you want to clear/retrieve:");
             messageCount = Integer.parseInt(reader.readLine());
         } catch (Exception e) {
             System.out.println("Something went wrong! Please try again...");
