@@ -2,6 +2,9 @@ package com.mail.commands.models;
 
 import com.mail.commands.repository.TempState;
 import com.mail.commands.utilities.CommandUtility;
+import com.mail.db.repositories.CheckedEmailsRepository;
+import com.mail.db.repositories.CheckedEmailsRepositoryImpl;
+import com.mail.db.utilities.MysqlHelper;
 import com.mail.factory.constructors.PopConstructorImpl;
 import com.mail.factory.constructors.PopConstructorInterface;
 import com.mail.factory.models.CheckedEmail;
@@ -10,6 +13,7 @@ import com.mail.factory.models.PopClientInterface;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.sql.Connection;
 import java.util.List;
 
 public class ClearEmailsCommand implements CommandInterface {
@@ -40,6 +44,7 @@ public class ClearEmailsCommand implements CommandInterface {
         }
         if (this.clearEmails) {
             System.out.println("Emails retrieved and cleared successfully!");
+            saveEmailsToDB(state);
         } else {
             System.out.println("Emails retrieved successfully!");
         }
@@ -57,6 +62,23 @@ public class ClearEmailsCommand implements CommandInterface {
             e.printStackTrace();
         }
         return messageCount;
+    }
+
+    private void saveEmailsToDB(TempState state) {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Please provide the credentials in the format <url username password>");
+            System.out.println("Example url: <jdbc:mysql://localhost:3306/table_name>");
+            String creds = reader.readLine();
+//            Connection connection = MysqlHelper.dbConnect(creds);
+            CheckedEmailsRepository dbEmailRepository = new CheckedEmailsRepositoryImpl();
+            for (CheckedEmail email: state.getCurrentEmails()) {
+                dbEmailRepository.saveCheckedEmail(email, creds);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Something went wrong! Please try again...");
+        }
     }
 
 

@@ -25,3 +25,4 @@ hs_err_pid*
 # config files
 email-connectors.txt
 message-templates.txt
+db_creds.txt
